@@ -31,6 +31,10 @@ public class SegUsuarioService {
 
     public List<SegUsuarioPerfil> saveAllUsuarioPerfil(List<SegUsuarioPerfil> perfiles) {
         boolean porOmisionFlag = false;
+        if (perfiles.isEmpty()) {
+            String exceptionMessage = "There must be at least one USUARIOPERFIL";
+            throw new CreateException(exceptionMessage);
+        }
         for (SegUsuarioPerfil usuarioPerfil : perfiles) {
             Optional<SegUsuario> usuarioOptional = this.usuarioRepository.findById(
                     usuarioPerfil.getPk().getCodigoUsuario());
