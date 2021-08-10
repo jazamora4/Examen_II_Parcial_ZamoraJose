@@ -4,5 +4,4 @@ import lombok.Data;
 
 @Data
 public class PerfilRQ {
-    private String codigoPerfil;
-}
+    private String codigoPerfil;}

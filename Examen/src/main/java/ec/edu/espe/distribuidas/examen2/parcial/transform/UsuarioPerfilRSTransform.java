@@ -8,9 +8,11 @@ public class UsuarioPerfilRSTransform {
         return UsuarioPerfilRS.builder()
                 .codigoUsuario(usuarioPerfil.getUsuario().getCodUsuario())
                 .identificacionUsuario(usuarioPerfil.getUsuario().getIdentificacion())
+                .nombreUsuario(usuarioPerfil.getUsuario().getNombre())
                 .codigoPerfil(usuarioPerfil.getPerfil().getCodigoPerfil())
                 .nombre(usuarioPerfil.getPerfil().getNombre())
                 .estado(usuarioPerfil.getEstado())
+                .porOmision(usuarioPerfil.getPorOmision())
                 .build();
 
     }

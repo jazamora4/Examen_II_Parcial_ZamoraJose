@@ -26,7 +26,7 @@ public class SegUsuarioService {
     }
 
     public List<SegUsuarioPerfil> listAllUsuarioPerfilByEstado(String estado) {
-        return this.usuarioPerfilRepository.findByEstadoOrderByPerfilNombre(estado);
+        return this.usuarioPerfilRepository.findByEstadoOrderByUsuarioNombreAscPerfilNombreAscPorOmisionAsc(estado);
     }
 
     public List<SegUsuarioPerfil> saveAllUsuarioPerfil(List<SegUsuarioPerfil> perfiles) {
@@ -49,6 +49,18 @@ public class SegUsuarioService {
             usuarioPerfil.setUsuario(usuarioOptional.get());
             usuarioPerfil.setPerfil(perfilOptional.get());
             usuarioPerfil.setEstado("ACT");
+            List<SegUsuarioPerfil> perfilesAsignados = this.usuarioPerfilRepository.findByUsuarioCodUsuario(
+                    usuarioPerfil.getPk().getCodigoUsuario());
+            for (SegUsuarioPerfil perfil : perfilesAsignados) {
+                if (perfil.getPk().getCodigoPerfil().equals(usuarioPerfil.getPk().getCodigoPerfil())) {
+                    String exceptionMessage = "The USUARIO already has PERFIL with codigo: "
+                            + usuarioPerfil.getPk().getCodigoPerfil();
+                    throw new CreateException(exceptionMessage);
+                }
+                if ("S".equals(perfil.getPorOmision())) {
+                    porOmisionFlag = true;
+                }
+            }
             if (!porOmisionFlag) {
                 usuarioPerfil.setPorOmision("S");
                 porOmisionFlag = true;

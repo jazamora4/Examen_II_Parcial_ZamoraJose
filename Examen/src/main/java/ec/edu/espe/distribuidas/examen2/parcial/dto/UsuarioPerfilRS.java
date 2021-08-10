@@ -8,7 +8,9 @@ import lombok.Data;
 public class UsuarioPerfilRS {
     private String codigoUsuario;
     private String identificacionUsuario;
+    private String nombreUsuario;
     private String codigoPerfil;
     private String nombre;
     private String estado;
+    private String porOmision;
 }

@@ -7,4 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SegUsuarioPerfilRepository extends JpaRepository<SegUsuarioPerfil, SegUsuarioPerfilPK> {
     List<SegUsuarioPerfil> findByEstadoOrderByPerfilNombre(String estado);
+
+    List<SegUsuarioPerfil> findByUsuarioCodUsuario(String codigoUsuario);
+
+    List<SegUsuarioPerfil> findByEstadoOrderByUsuarioNombreAscPerfilNombreAscPorOmisionAsc(String estado);
 }
